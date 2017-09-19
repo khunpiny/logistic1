@@ -58,9 +58,8 @@
                                   required></textarea>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-6">
+                    <div class="col-sm-offset-1 col-sm-2">
                         <button type="submit" name="submitButton" class="btn btn-primary">สั่ง</button>
                         <button type="submit" class="btn btn-danger">ยกเลิก</button>
                     </div>

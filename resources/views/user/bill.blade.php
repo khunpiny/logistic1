@@ -4,7 +4,9 @@
         <link href="{{asset('css/bootstrap-bill.css')}}" rel="stylesheet">
     </head>
     <body>
-
+   <form class="form-horizotal" method="POST" role="form" action="{{url('savebill')}}">
+             {!! csrf_field() !!}
+             <fieldset>
     <div class="container">
         <div class="row">
 
@@ -34,9 +36,10 @@
                         <div class="col-xs-8 col-sm-8 col-md-8 text-left">
                             <div class="receipt-right">
                                 <h5>ที่อยู่
-                                    <small> </small>
+                                    <small></small>
                                 </h5>
-                                <p></p>
+                                <p><input type="hidden" name="location" value="{{$location}}">{{$location}}</p>
+                                <p><input type="hidden" name="time">{{$time}}</p>
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4">
@@ -67,10 +70,13 @@
                             <td>{{ $products[$i]->name }}</td>
                             <td> {{ $amounts[$i] }} </td>
                              <td>{{ $products[$i]->price }}</td>
-                             <td>{{ $products[$i]->price }}</td>
+                             @php $price[] = 0;
+                             $price[$i] = $products[$i]->price*$amounts[$i]
+                             @endphp
+                             <td>{{ $price[$i] }}</td>
 
                                </tr>
-                                @php $total += $products[$i]->price; 
+                                @php $total += $price[$i]; 
                                 @endphp
                                @endfor
                         @else
@@ -93,7 +99,7 @@
                     <div class="receipt-header receipt-header-mid receipt-footer">
                         <div class="col-xs-8 col-sm-8 col-md-8 text-left">
                             <div class="receipt-right">
-                                <p><b>บิลวันที่</b> 15 สิงหาคม 2560</p>
+                              
                                 <h5 style="color: rgb(140, 140, 140);"></h5>
                             </div>
                         </div>
@@ -103,8 +109,16 @@
                             </div>
                         </div>
                     </div>
+     
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <button type="submit" name="submitButton" class="btn btn-primary">สั่ง</button>
+                        <button type="submit" class="btn btn-danger">ยกเลิก</button>
+                    </div>
                 </div>
-
+                </div>
+          </form>
+       </fieldset>
             </div>
         </div>
     </div>

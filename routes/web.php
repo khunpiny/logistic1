@@ -29,6 +29,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('postdata', 'ProductController@postdata');
 
     Route::post('billdata', 'BillController@billdata');
+    Route::post('savebill','BillController@savebill');
 
     Route::get('buystore', 'Controller@buystore');
 
