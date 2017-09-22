@@ -51,6 +51,9 @@ Route::group(['middleware' => 'web'], function () {
 //search data
     Route::post('/store', 'ProductController@postSearch');
 
+//pdf
+    Route::get('pdf','PDFController@pdf');
+
 });
 /*
 Route::get('navbar','Controller@navbar');
