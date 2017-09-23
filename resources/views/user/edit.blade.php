@@ -8,7 +8,7 @@
             <div class="row">
 
 
-                <form class="form-horizontal" action="{{url('postdata')}}" method="POST" role="form">
+                <form class="form-horizontal" action="{{url('postEdit')}}" method="POST" role="form">
                     {!! csrf_field() !!}
                     <fieldset>
                         <!-- Form Name -->

@@ -14,15 +14,7 @@
                     <fieldset>
                         <!-- Form Name -->
                         <legend>Product</legend>
-                        <!-- Text input-->
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="textinput">Product id</label>
-                            <div class="col-md-6">
-                                <input id="textinput" name="products_id" type="text" class="form-control input-md"
-                                       required="">
-                            </div>
-                        </div>
+                    
 
                         <!-- Text input-->
                         <div class="form-group">

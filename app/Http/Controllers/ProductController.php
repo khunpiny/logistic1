@@ -1,8 +1,4 @@
-
-
-
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -30,7 +26,6 @@ class ProductController extends Controller
     public function postdata(Request $request)
     {
         $data = new Product;
-        $data->products_id = $request->get('products_id');
         $data->name = $request->get('name');
         $data->price = $request->get('price');
         $data->cost = $request->get('cost');
@@ -42,28 +37,35 @@ class ProductController extends Controller
     }
 
     //ปุ่มลบ
-    public function deleteQuestion($id)
+    public function deleteQuestion($products_id)
     {
-        $question = DB::table('products')->where('id', $id)->delete();
+        $question = DB::table('products')->where('products_id', $products_id)->delete();
         return Redirect::back();
     }
 
 
-    public function edit($id)
+    public function edit($products_id)
     {
-        $data = Product::find($id);
+        $data = Product::find($products_id);
         return View('user.edit')->with('data', $data);
     }
 
-    public function postEdit($id)
+    public function postEdit(Request $request)
     {
-        $data = Product::find($id);
-        $data->products_id = $request->get('products_id');
-        $data->name = $request->get('name');
-        $data->price = $request->get('price');
-        $data->cost = $request->get('cost');
-        $data->amount = $request->get('amount');
-        $data->category = $request->get('category');
+        $products_id = $request->products_id;
+        $name = $request->name;
+        $price = $request->price;
+        $cost = $request->cost;
+        $amount = $request->amount;
+        $category = $request->category;
+
+        $data = Product::find($request->products_id);
+        $data->products_id =  $products_id;
+        $data->name = $name;
+        $data->price = $price;
+        $data->cost = $cost;
+        $data->amount = $amount;
+        $data->category = $category;
         /*$data->description = $request->get('description');*/
         $data->save();
         return Redirect::to('store');
@@ -73,7 +75,7 @@ class ProductController extends Controller
     //ฟังก์ชันลบข้อมูลของcheckbox
     public function delete()
     {
-        $products = DB::table('products')->orderBy('id', 'desc')->paginate(25);
+        $products = DB::table('products')->orderBy('products_id', 'desc')->paginate(25);
 
         $products->setPath('delete');
         return View('user.store')->with('products', $products)->with('delete', 1);

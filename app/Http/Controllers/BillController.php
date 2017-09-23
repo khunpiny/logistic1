@@ -32,13 +32,13 @@ class BillController extends Controller
         /*$data->description = $request->get('description');*/
 
         $amounts = $request->get('amount');
-        $products = Product::WhereIn('id', $request->products_id)->get();
+        $products = Product::WhereIn('products_id', $request->products_id)->get();
         return view('user.bill')->with('products', $products)->with('amounts',$amounts)->with('location',$location)->with('time',$time);
     }
 
     public function query(Request $request)
     {
-        $products = Product::WhereIn('id', $request->products_id)->get();
+        $products = Product::WhereIn('products_id', $request->products_id)->get();
         return view('user.bill')->with('products', $products);
 
     }

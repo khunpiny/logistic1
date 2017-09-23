@@ -12,14 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css"> 
     <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
- 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -59,17 +57,17 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a>
-                                         <a href="store">คลังสินค้า</a>
+                                         <a href="{{url('store')}}">คลังสินค้า</a>
                                         </a>
                                     </li>
                                     <li>
                                         <a>
-                                         <a href="insertdata">เพิ่มสินค้า</a>
+                                         <a href="{{url('insertdata')}}">เพิ่มสินค้า</a>
                                         </a>
                                     </li>
                                     <li>
                                         <a>
-                                         <a href="buystore">สั่งซื้อสินค้า</a>
+                                         <a href="{{url('buystore')}}">สั่งซื้อสินค้า</a>
                                         </a>
                                     </li>
                                 </ul>

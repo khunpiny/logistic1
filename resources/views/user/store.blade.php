@@ -62,10 +62,12 @@
         <form action="" method="POST" role="form" id="deletes">
             @if(isset($delete) && $delete==1)
                 {!! csrf_field() !!}
-                <a href="{{url('store')}}" class="btn btn-default pull-right">Cancel</a>
-                <button type="button" data-toggle="modal" data-target="#myModal"
+                 <div class="col-md-offset-10">
+                <a href="{{url('store')}}" class="btn btn-info btn-md">Cancel</a>
+                <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Delete</a>
+                </div>
             @else
-                <a href="{{url('delete')}}"" class="btn btn-danger btn-sm pull-right glyphicon glyphicon-trash"></a>
+                <a href="{{url('delete')}}" class="btn btn-danger btn-sm pull-right glyphicon glyphicon-trash"></a>
                 <a href="{{url('insertdata')}}" class="btn btn-primary btn-sm pull-right"><b>+</b> Add new
                     categories</a>
             @endif
@@ -96,7 +98,7 @@
                 @foreach($products as $p)
                     <tr>
                         @if(isset($delete) && $delete==1 )
-                            <td><input type="checkbox" name="checkbox[]" value="{{$p->id}}"></td>
+                            <td><input type="checkbox" name="checkbox[]" value="{{$p->products_id}}"></td>
                         @endif
                         <td>{{$n+1}}</td>
                         <td>{{$p->products_id}}</td>
@@ -105,9 +107,9 @@
                         <td>{{$p->price}}</td>
                         <td>{{$p->cost}}</td>
                         <td>{{$p->amount}}</td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' href="edit/{{$p->id}}"><span
+                        <td class="text-center"><a class='btn btn-info btn-xs' href="edit/{{$p->products_id}}"><span
                                         class="glyphicon glyphicon-edit"></span> Edit</a>
-                            <a href="store/delete/{{$p->id}}" onclick="return confirm('Are you sure to delete')"
+                            <a href="store/delete/{{$p->products_id}}" onclick="return confirm('Are you sure to delete')"
                                class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>
                                 Del</a></center></td>
                         <?php $n++;?>
@@ -131,7 +133,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" id="confirm">Confirm</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                            </button>
                         </div>
                     </div>
                 </div>

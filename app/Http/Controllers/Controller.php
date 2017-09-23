@@ -24,14 +24,14 @@ class Controller extends BaseController
 
     public function store()
     {
-        $products = DB::table('products')->orderBy('id', 'desc')->paginate(25);
+        $products = DB::table('products')->orderBy('products_id', 'desc')->paginate(25);
         $products->setPath('products');
         return View('user.store')->with('products', $products);
     }
 
     public function buystore()
     {
-        $products = DB::table('products')->orderBy('id', 'desc')->paginate(25);
+        $products = DB::table('products')->orderBy('products_id', 'desc')->paginate(25);
         $products->setPath('products');
         return View('user.buystore')->with('products', $products);
     }

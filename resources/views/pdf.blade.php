@@ -32,7 +32,6 @@
         body {
             font-family: "THSarabunNew";
         }
-
 		table{
 			border-collapse: collapse;
 		}
@@ -53,7 +52,6 @@
          	<td>{{$c->location}}</td>
          </tr>
     	@endforeach
-    	ใบแจ้งหนี้
     </table>
 </body>
 </html>

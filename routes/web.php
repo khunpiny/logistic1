@@ -41,8 +41,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('success', 'Controller@success');
 
 //edit
-    Route::get('edit/{id}', 'ProductController@edit');
-    Route::post('edit/{id}', 'Productcontroller@postEdit');
+    Route::get('edit/{products_id}', 'ProductController@edit');
+    Route::post('postEdit', 'Productcontroller@postEdit');
 
 //delete
     Route::get('delete', 'ProductController@delete');
