@@ -18,6 +18,7 @@
     <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link href="css/bootstrap-navbar.css" rel="stylesheet" type="text/css">
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -26,115 +27,46 @@
     </script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        
-                        <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   สินค้า <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a>
-                                         <a href="{{url('store')}}">คลังสินค้า</a>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                         <a href="{{url('insertdata')}}">เพิ่มสินค้า</a>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                         <a href="{{url('buystore')}}">สั่งซื้อสินค้า</a>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   รายการสั่งซื้อ <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a>
-                                         <a href="bill">บิลสินค้า</a>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                         <a href="insertdata">รายการที่ส่ง</a>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                         <a href="buystore">ร</a>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
+   <nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="{{url('/home')}}"><span><img src="img/pipe.png" height="24"/></span> ระบบจัดการ<span class="text-danger">อ</span>ะไหล่รถยนต์</a>
+</div>
+<div>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="{{url('/transport')}}"><i class="fa fa-comments" aria-hidden="true"></i>&nbspรายการที่ต้องส่ง</a></li>
+<li><a href="{{url('/search2')}}"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>&nbsp สั่งสินค้า</a></li> 
+<li><a href="{{url('/store')}}"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>&nbsp คลังสินค้า</a></li>
+<li><button type="button" class="btn btn-outline-primary btn-margin-right navbar-btn"><a href="{{url('/regiscustomer')}}">ลูกค้ารายใหม่</a></button></li></li>@if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+<li class="dropdown">
+<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
+<ul class="dropdown-menu">
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Account Settings</a></li>
+<li>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+<a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                                        </form></li>
+                                        
+</ul>
+</li>
+@endif
+</ul>
+</div>
+</div>
+</nav>
 
         @yield('content')
     </div>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/jquery-navbar.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

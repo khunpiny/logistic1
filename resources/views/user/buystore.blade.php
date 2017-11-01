@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <head>
-        <script type="text/javascript" src="js/jquerytext.js"></script>
-    </head>
+
+    <script type="text/javascript" src="{{url('js/jquerytext.js')}}"></script> 
+    <meta charset="utf-8">
+    <title>Angular Live Search</title>
+    <link rel="stylesheet" href="styles.css">
+
     <div class="container">
         <div class="page-header">
             <h1>สั่งซื้อสินค้า</h1>
@@ -10,30 +13,32 @@
 
         <div class="well">กรุณากรอกข้อมูลการสั่งซื้อให้ถูกต้องและครบถ้วน</div>
 
-        <form class="form-horizontal" method="POST" role="form" action="{{url('billdata')}}">
+        <form class="form-horizontal" method="POST" role="form" action="{{url('billdata')}}" onsubmit="clearField();">
             {!! csrf_field() !!}
             <fieldset>
+<body ng-controller="searchController">
+     <div class="form-group">
+       <label for="user_id" class="col-sm-2 control-label">ค้นหาลูกค้า</label>
+      <div class="col-sm-3">
+     <!-- Search -->
+      <input type="text" name="name" placeholder="Search" ng-model="query" ng-focus="focus=true"  class="form-control">
+    </div>
+    </div>
+     
 
-                <div class="form-group">
-                    <label for="customer_id" class="col-sm-2 control-label">รหัสผู้สั่ง</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="customer_id" name="customer_id"
-                               placeholder="รหัสผู้สั่ง" required autofocus>
-                    </div>
-                </div>
+     <div id="search-results" ng-show="focus">
+    <div class="search-result" ng-repeat="item in data | search:query" ng-bind="item" ng-click="setQuery(item)"></div>
+  </div>
+</body>
 
-                <div class="form-group">
-                    <label for="user_id" class="col-sm-2 control-label">รหัสลูกค้า</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="user_id" name="user_id" placeholder="รหัสลูกค้า"
-                               required autofocus>
-                    </div>
-                </div>
+
+                
+
 
                 <div class="form-group">
                     <label for="products_id" class="col-sm-2 control-label">สินค้า</label>
                     <div class="col-sm-3">
-                        <input type="text" name="products_id[]" class="form-control" placeholder="รหัสสินค้า" required
+                        <input id="name" type="text" name="name[]" class="form-control" placeholder="ชื่อสินค้า" required
                                autofocus></div>
                     <label for="amount" class="col-sm-2 control-label">จำนวน</label>
                     <div class="col-sm-3">
@@ -66,6 +71,16 @@
                 </div>
             </fieldset>
         </form>
-
     </div>
+
+   <!-- Load JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script>
+     var data = {!! $customers !!};
+  </script>
+  <script src="{{ asset('js/appsearch.js') }}"></script>
+  <script type="text/javascript">
+
+</script>
 @endsection
+    </html>

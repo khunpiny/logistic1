@@ -13,4 +13,10 @@ class PDFController extends Controller
       $pdf = PDF::loadView('pdf',['Orders' => $Orders]);
       return @$pdf->stream();
     }
+
+    public function transport()
+    {
+      $Orders = Order::all();
+      return view('user.transport')->with('Orders',$Orders);
+    }
 }

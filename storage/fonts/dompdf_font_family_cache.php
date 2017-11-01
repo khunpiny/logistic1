@@ -83,4 +83,7 @@
     'italic' => $fontDir . '\cb60d647c1c792078a7a3c490b7b899f',
     'bold_italic' => $fontDir . '\5e441abd36a4d7784b02264494ed3826',
   ),
+  'glyphicons halflings' => array(
+    'normal' => $fontDir . '\8b627341fba74cf6451a73d70f8679fc',
+  ),
 ) ?>

@@ -12,15 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
 
 Route::get('/a', function () {
     return view('test');
 });
 Route::auth();
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::get('/home', 'HomeController@index');
     Route::get('store', 'Controller@store');
@@ -30,8 +31,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('billdata', 'BillController@billdata');
     Route::post('savebill','BillController@savebill');
-
-    Route::get('buystore', 'Controller@buystore');
 
     Route::get('/bill', 'BillController@query');
 
@@ -53,6 +52,18 @@ Route::group(['middleware' => 'web'], function () {
 
 //pdf
     Route::get('pdf','PDFController@pdf');
+    Route::get('/transport','PDFController@transport');
+
+//autocomplete
+    Route::get('/buystore',array('as' => 'autocomplete','uses' => 'BillController@buystore'));
+    Route::get('/autocomplete',array('as' => 'autocomplete','uses' => 'BillController@autocomplete'));
+
+ //SearchController
+    Route::get('/index','SearchController@index');
+    Route::get('/search','SearchController@search');
+   
+    Route::get('/search2','SearchController@search2');
+
 
 });
 /*
