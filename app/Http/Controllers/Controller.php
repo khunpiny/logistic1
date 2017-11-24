@@ -7,6 +7,11 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use DB;
+use App\Product;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Customer;
+
 
 class Controller extends BaseController
 {
@@ -22,11 +27,16 @@ class Controller extends BaseController
           return  view('auth.login') ;
       }*/
 
-    public function store()
+    public function store(Request $request)
     {
-        $products = DB::table('products')->orderBy('products_id', 'desc')->paginate(25);
-        $products->setPath('products');
-        return View('user.store')->with('products', $products);
+        // $products = DB::table('products')->orderBy('products_id', 'desc')->paginate(25);
+        // $products->setPath('products');
+         $NUM_PAGE = 15;
+            $products = Product::paginate($NUM_PAGE);
+            $page = $request->input('page');
+            $page = ($page != null)?$page:1;
+        return View('user.store')->with('products', $products)->with('page',$page)
+                                        ->with('NUM_PAGE',$NUM_PAGE);
     }
 
     public function buystore()
@@ -56,5 +66,15 @@ class Controller extends BaseController
         $customers = DB::table('customers')->latest()->first();
         return view('user.success')->with('customers', $customers);
     }
-
+ 
+    public function test()
+    {
+        $customers = Customer::all();
+        foreach($customers as $value) {
+            $names[] = array($value->name, $value->latitude, $value->longtitude   );
+        }
+        
+        return view('test')->with(['customers' => json_encode($names)])->with('cus',$customers);
+        
+    }
 }

@@ -12,15 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/a', function () {
-    return view('test');
+
+Route::get('/test','Controller@test');
+
+Route::get('/billsuccess', function () {
+    return view('user.billsuccess');
 });
 Route::auth();
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::get('/home', 'HomeController@index');
     Route::get('store', 'Controller@store');
@@ -31,8 +34,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('billdata', 'BillController@billdata');
     Route::post('savebill','BillController@savebill');
 
-    Route::get('buystore', 'Controller@buystore');
-
     Route::get('/bill', 'BillController@query');
 
 
@@ -41,7 +42,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('success', 'Controller@success');
 
 //edit
-    Route::get('edit/{products_id}', 'ProductController@edit');
+    Route::get('edit.{products_id}', 'ProductController@edit');
     Route::post('postEdit', 'Productcontroller@postEdit');
 
 //delete
@@ -53,6 +54,17 @@ Route::group(['middleware' => 'web'], function () {
 
 //pdf
     Route::get('pdf','PDFController@pdf');
+//บิลสินค้า
+    Route::get('/transport','TransportController@transport');
+    Route::post('/transport','TransportController@showbill');
+    Route::get('billprevious.{id}','TransportController@billprevious');
+
+
+//SearchController
+    Route::get('/index','SearchController@index');
+    Route::get('/search','SearchController@search');
+    Route::get('/buystore','SearchController@search2');
+
 
 });
 /*

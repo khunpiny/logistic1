@@ -20,31 +20,29 @@
 }
 </style>
     </head>
-    <body>
-   <form class="form-horizotal" method="POST" role="form" action="{{url('savebill')}}">
-             {!! csrf_field() !!}
-             <fieldset>
-    
+    <body>   
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
 
+         
+                <h2>ใบสั่งสินค้า</h2><h3 class="pull-right">ลำดับที่ # {{$order_id}}</h3>
 
-                <h2>ใบสั่งสินค้า</h2><h3 class="pull-right">ลำดับที่ # {{$id}}</h3>
-                <input type="hidden" name="order_id" value="{{$id}}">
+
         
             </div>
+
             <hr>
             <div class="row">
                 <div class="col-xs-6">
                     <address>
-                        @foreach($customer as $c)
+                        
                     <strong>สถานที่จัดส่ง:</strong><br>  
-                    <input type="hidden" name="customer" value="{{$c->customers_id}}">
-                        {{$c->name}}<br>
-                        {{$c->address}}<br>
-                        @endforeach
+                    
+                        {{$customer_name}}<br>
+                        {{$customer_address}}<br>
+                        
 
                     </address>
                 </div>
@@ -69,7 +67,7 @@
                 <div class="col-xs-6 text-right">
                     <address>
                         <strong>วันที่ส่งสินค้า:</strong><br>
-                        {{$time}}<br><br>
+                        <br><br>
                     </address>
                 </div>
             </div>
@@ -95,41 +93,36 @@
                             </thead>
                             <tbody>
 
-                                  @php $total = 0; @endphp
-                        @if(isset($products) && !empty($products))
-                            @for($i=0;$i<count($products);$i++)
-                                           
-                            <tr><input type="hidden" name="products[]" value="{{$products[$i]->products_id}}">
-                            <td>{{ $products[$i]->name }}</td>
-                            <input type="hidden" name="name[]" value="{{$products[$i]->name}}">
-                            <td class="text-center">{{ $products[$i]->price }}</td>
-                            <input type="hidden" name="price[]" value="{{$products[$i]->price}}">
-                            <td class="text-center"> {{ $amounts[$i] }}
-
-                            <input type="hidden" name="amounts[]" value="{{$amounts[$i]}}">
-
-                             </td>
-                             @php $price[] = 0;
-                             $price[$i] = $products[$i]->price*$amounts[$i]
-                             @endphp
-                             <td class="text-right">{{ $price[$i] }}</td>
-
-                               </tr>
-                                @php $total += $price[$i];
+                @foreach($data as $d)
+            <tr>
+                <td>
+                 <?php echo (DB::table('products')->where('products_id',$d->products_id)->value('name'));
+                 ?> 
+                </td>
+                <td class="text-center">
+                 <?php echo (DB::table('products')->where('products_id',$d->products_id)->value('price'));
+                 ?> 
+                </td>
+                <td class="text-center">
+                    {{$d->amount_d}}
+                </td>
+                @php $total = 0; @endphp
+                @php $total = $d->amount_d*$d->price_d;
                                 @endphp
-                               @endfor
-                        @else
-                            ไม่มีข้อมูล
-                        @endif
-                              
-                                
-                                <tr>
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line text-center"><strong>ราคารวม</strong></td>
-                                    <td class="thick-line text-right">{{$total}}</td>
-                                </tr>
-                                <input type="hidden" name="total" value="{{$total}}">
+                       
+                <td class="text-right">{{$total}}</td>    
+            </tr>
+            @endforeach
+            <tr> 
+                <td class="thick-line"></td>
+                <td class="thick-line"></td>
+                <td class="thick-line text-center"><strong>ราคารวม</strong></td>
+                <td class="thick-line text-right">
+                    {{$price_total}}
+                </td> 
+                         
+            </tr>  
+                   
                                 <!-- <tr>
                                     <td class="no-line"></td>
                                     <td class="no-line"></td>
@@ -143,14 +136,14 @@
                                     <td class="no-line text-right">$685.99</td>
                                 </tr> -->
                             </tbody>
+                        
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>  
+          <a href="{{ url('pdf') }}" class="btn btn-xs btn-primary">Export PDF</a>
         </div>
     </div>
 </div>
 <center>
-<button class="btn btn-success" type="submit" >สั่งสินค้า</button></center>
-</form>
 @endsection

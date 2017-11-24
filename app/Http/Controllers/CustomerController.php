@@ -19,6 +19,7 @@ class CustomerController extends Controller
 {
     public function regiscustomer()
     {
+
         return view('user.regiscustomer');
     }
 
@@ -30,6 +31,8 @@ class CustomerController extends Controller
         $data->address = $request->get('address');
         $data->tel = $request->get('tel');
         $data->email = $request->get('email');
+        $data->latitude = $request->get('latitude');
+        $data->longtitude = $request->get('longtitude');
         /*$data->description = $request->get('description');*/
         $data->save();
         return Redirect::to('success');
