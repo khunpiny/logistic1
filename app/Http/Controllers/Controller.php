@@ -11,8 +11,8 @@ use App\Product;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Customer;
-
-
+use \Input as Input;
+use App\Test;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -69,12 +69,50 @@ class Controller extends BaseController
  
     public function test()
     {
-        $customers = Customer::all();
+        //$customers = Customer::all();
+        $customers = Customer::where('customers_id', '!=', 11)->get();
         foreach($customers as $value) {
             $names[] = array($value->name, $value->latitude, $value->longtitude   );
         }
+        $origin = Customer::where('customers_id', 12)->first();
+        return view('test', ['customers' => json_encode($names), 
+                             'cus' => $customers,
+                             'customers_obj' => $customers,
+                             'origin' => json_encode($origin)]);
         
-        return view('test')->with(['customers' => json_encode($names)])->with('cus',$customers);
-        
+    }
+
+    public function outofstock(request $request){
+       
+        $amount = Product::where('amount','<=',10)->paginate(25);
+        return view('user.store')->with('products',$amount);
+    }
+
+    
+
+    //การบันทึกรูปภาพ
+    // public function upload(){
+
+    //     if(Input::hasFile('file')){
+
+    //         echo 'Uploaded';
+    //         $file = Input::file('file');
+    //         $file->move('public/image', $file->getClientOriginalName());
+    //         echo '';
+    //        $data = new Test;
+    //        $data->imag = $file->getClientOriginalName();
+    //        $data->save();
+    //     }
+    //     return view('home');
+
+    // }
+
+    public function searchdata(request $request){
+        $data = $request->get('data');
+        $datas = Product::where('name','like','%'.$data.'%')->paginate(25);
+        return view('user.store')->with('products',$datas); 
+    }
+    public function profile(){
+        return view('user.profile');
     }
 }

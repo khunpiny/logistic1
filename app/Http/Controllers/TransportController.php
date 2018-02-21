@@ -19,21 +19,19 @@ use App\Order_product;
 
 class TransportController extends Controller
 {
-    public function transport()
+    public function transport(Request $request)
     {
-    	$orders = Order::all();
-        
+        $search = $request->get('search');
+        if($search){
+            $orders = Order::where('time','like','%'.$search.'%')->get();
+        }else{
+            $orders = Order::all();
+        }
+    	
         return view('user.transport')->with('orders',$orders);
 
     }
 
-    public function showbill(Request $request)
-    {
-        $order_id = $request->get('order_id');
-        dd($order_id);
-
-        return view('user.transport');    
-    }
     public function billprevious($id)
     {
         $order_id = $id;
@@ -52,4 +50,29 @@ class TransportController extends Controller
                                         
 
     }
+    public function status(Request $request)
+    {
+        $status = $request->get('checkbox');
+        for($i=0;$i<count($status);$i++)
+        { 
+            $data = Order::find($status[$i]);
+            $data->status = "ส่งแล้ว";
+            $data->save();
+          
+        }
+        return back();
+    }
+
+    public function gettran()
+    {
+        $orders = Order::where('status',"ส่งแล้ว")->get();
+        return view('user.transport')->with('orders',$orders);
+    }
+
+    public function posttran()
+    {
+        $orders = Order::where('status',"เตรียมส่ง")->get();
+        return view('user.transport')->with('orders',$orders);
+    }
+
 }

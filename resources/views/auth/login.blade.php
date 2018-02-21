@@ -26,13 +26,13 @@
          {{ csrf_field() }}
         <div class="form__field{{ $errors->has('email') ? ' has-error' : '' }}">
           <label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">Email</span></label>
-         <input id="login__username" type="text" name="email" class="form__input" placeholder="Username" required  value="{{ old('email') }}">
+         <input id="login__username" type="text" name="email" class="form__input" placeholder="ชื่อผู้ใช้" required  value="{{ old('email') }}">
          <br>
         </div>
 
         <div class="form__field{{ $errors->has('password') ? ' has-error' : '' }}">
           <label for="login__password"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Password</span></label>
-          <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required autofocus>
+          <input id="login__password" type="password" name="password" class="form__input" placeholder="รหัสผ่าน" required autofocus>
            @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -41,12 +41,12 @@
         </div>
 
         <div class="form__field">
-          <input type="submit" value="Sign In">
+          <input type="submit" value="เข้าสู่ระบบ">
         </div>
 
       </form>
 
-      <p class="text--center">Not a member? <a href="{{ url('/register') }}">Sign up now</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
+      <p class="text--center">ไม่ใช่สมาชิก<a href="{{ url('/register') }}">ลงทะเบียน</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
 
     </div>
     

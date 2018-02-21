@@ -13,6 +13,7 @@ use DB;
 use Session;
 use Input;
 use App\Product;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ProductController extends Controller
@@ -97,7 +98,7 @@ class ProductController extends Controller
     {
         $cat = $request->get('cat');
         $keyword = '%' . $request->get('keyword') . '%';
-        $products = DB::table('products')->where($cat, 'like', $keyword)->paginate(25);
+        $products = DB::table('products')->where($cat, 'like', $keyword)->paginate(50);
 
         //$stores = store::paginate(25);
         $products->setPath('store');
@@ -114,6 +115,29 @@ class ProductController extends Controller
         /*$data->description = $request->get('description');*/
         $data->save();
         return Redirect::to('buystore');
+    }
+
+    public function import(Request $request)
+    {
+       Excel::load(Input::file('input-b9'),function($reader){
+        $reader->each(function($sheet){
+            Product::firstOrCreate($sheet->toArray());
+        });
+       });
+      return Redirect::to('store');
+    }
+
+    public function export(){
+      $items = Product::all();
+      Excel::create('รายการสินค้า', function($excel) use($items) {
+          $excel->sheet('ExportFile', function($sheet) use($items) {
+              $sheet->fromArray($items);
+          });
+      })->export('xls');
+    }
+
+    public function fileexcel(){
+        return view('user.fileexcel');
     }
 
 }

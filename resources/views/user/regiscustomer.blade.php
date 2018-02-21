@@ -4,16 +4,7 @@
        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8xrFSxydXYrpufXe3QJc5e2EbbTZuMvc&libraries=places"
              async defer></script>
 
-<div class="col-md-2 column margintop20">
-            <ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> ลูกค้ารายใหม่ </a> </li> 
-  <li><a href="{{url('/test')}}" ><span class="glyphicon glyphicon-chevron-right"></span> ข้อมูลลูกค้าที่เป็นสมาชิก</a></li>
-  <!-- <li><a href="#" ><span class="glyphicon glyphicon-chevron-right"></span> รายการเตรียมจัดส่ง</a></li> -->
-  <!-- <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> สินค้าขายดี</a></li>
-  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Option 4</a></li>
-  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Option 5</a></li> -->
-</ul>
-</div>
+
 
 <form class="form-horizontal" action="{{url('customer')}}" method="POST" role="form">
 <fieldset>

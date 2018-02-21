@@ -56,9 +56,7 @@ class BillController extends Controller
         $checked=0;
         for($i=0;$i<count($amounts);$i++)
         {
-          echo "\n<\br>Count = ".count($amounts);
-          echo "\n<\br> amount = ".$amounts[$i];
-          echo "\n<\br> product->amount = ".$products[$i]->amount;
+         
           if($amounts[$i]>$products[$i]->amount)
           {
             
@@ -125,6 +123,7 @@ class BillController extends Controller
         $name = $request->get('name');
         $price = $request->get('price');
         $customer = $request->get('customer');
+        $time = $request->get('time');
         
 
          for($i=0;$i<count($products_id);$i++)
@@ -145,6 +144,7 @@ class BillController extends Controller
         $data->order_id = $request->get('order_id');
         $data->customers_id = $customer;
         $data->price_total = $request->get('total');
+        $data->time = $time;
         $data->save();
 
         for($i=0;$i<count($products_id);$i++)

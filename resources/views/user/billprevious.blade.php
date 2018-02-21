@@ -23,7 +23,7 @@
     <body>   
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-11">
             <div class="invoice-title">
 
          
@@ -75,7 +75,7 @@
     </div>
     
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>รายการสั่งซื้อ</strong></h3>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
             </div>  
-          <a href="{{ url('pdf') }}" class="btn btn-xs btn-primary">Export PDF</a>
+          <a href="pdf.{{$order_id}}" class="btn btn-xs btn-primary">Export PDF</a>
         </div>
     </div>
 </div>

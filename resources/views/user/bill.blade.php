@@ -20,14 +20,31 @@
 }
 </style>
     </head>
-    <body>
-   <form class="form-horizotal" method="POST" role="form" action="{{url('savebill')}}">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="portlet"><!-- /primary heading -->
+            <div class="portlet-heading">
+              
+            <div class="portlet-widgets">
+                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                  <span class="divider">
+                  </span>
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i>
+                  </a>
+                  <span class="divider">
+                  </span>
+                  <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+            </div>
+            <div class="clearfix">
+            </div>
+            </div>
+            <div id="portlet2" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                  <form class="form-horizotal" method="POST" role="form" action="{{url('savebill')}}">
              {!! csrf_field() !!}
              <fieldset>
     
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
+
             <div class="invoice-title">
 
 
@@ -70,15 +87,14 @@
                     <address>
                         <strong>วันที่ส่งสินค้า:</strong><br>
                         {{$time}}<br><br>
+                        <input type="hidden" name="time" value="{{$time}}">
                     </address>
                 </div>
             </div>
         </div>
-    </div>
+
     
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
+              <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>รายการสั่งซื้อ</strong></h3>
                 </div>
@@ -144,13 +160,23 @@
                                 </tr> -->
                             </tbody>
                         </table>
+                        
                     </div>
+                </div><center>
+<button class="btn btn-success" type="submit" >สั่งสินค้า</button></center>
+     
+      
+ 
+
+</form>
+   
+                   
+ 
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<center>
-<button class="btn btn-success" type="submit" >สั่งสินค้า</button></center>
-</form>
+       </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+    
 @endsection

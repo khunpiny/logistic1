@@ -1,35 +1,11 @@
-<!doctype html>
-<html lang="{{ config('app.locale') }}">
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ config('app.name', 'Laravel') }}</title>
-  
-  <link rel="stylesheet" type="text/css" media="all" href="style.css">
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
-     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link href="css/bootstrap-navbar.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-search.css')}}">
-    <link href="{{asset('css/bootstrap-navmenu.css')}}" rel="stylesheet">
-     <script type="text/javascript" src="{{url('js/jquerytext.js')}}"></script>
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
-
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
- 
-  <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-  <script type="text/javascript">
+@extends('layouts.app')
+@section('content')
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-search.css')}}">
+<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="{{url('js/jquerytext.js')}}"></script> 
+<script type="text/javascript">
     $(function(){
   var currencies = {!! $customers !!};
   $('#autocomplete').autocomplete({
@@ -41,49 +17,27 @@
   });
 
   });
-  
-  </script>
-</head>
-<body>
-  <nav class="navbar navbar-inverse">
-<div class="container-fluid">
-<div class="navbar-header">
-<a class="navbar-brand" href="{{url('/home')}}"><span><img src="img/pipe.png" height="24"/></span> ระบบจัดการ<span class="text-danger">อ</span>ะไหล่รถยนต์</a>
-</div>
-<div>
-<ul class="nav navbar-nav navbar-right">
-<li><a href="{{url('/transport')}}"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i>&nbsp&nbsp บิลสินค้า</a></li>
-<li><a href="{{url('/buystore')}}"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>&nbsp สั่งสินค้า</a></li> 
-<li><a href="{{url('/store')}}"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>&nbsp คลังสินค้า</a></li>
-<li><button type="button" class="btn btn-outline-primary btn-margin-right navbar-btn"><a href="{{url('/regiscustomer')}}">ลูกค้ารายใหม่</a></button></li></li>@if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-<li class="dropdown">
-<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
-<ul class="dropdown-menu">
-
-<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Account Settings</a></li>
-<li>
-
-<a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form></li>
-                                        
-</ul>
-</li>
-@endif
-</ul>
-</div>
-</div>
-</nav>
-
- <div class="container">
-        <div class="page-header">
-            <h1>สั่งซื้อสินค้า</h1>
-        </div>
+</script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="portlet"><!-- /primary heading -->
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">สั่งซื้อสินค้า</h3>
+            <div class="portlet-widgets">
+                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                  <span class="divider">
+                  </span>
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i>
+                  </a>
+                  <span class="divider">
+                  </span>
+                  <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+            </div>
+            <div class="clearfix">
+            </div>
+            </div>
+            <div id="portlet2" class="panel-collapse collapse in">
+                <div class="portlet-body">
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -94,23 +48,27 @@
             </ul>
         </div>
    @endif
-
-    <form class="form-horizontal" method="POST" role="form" action="{{url('billdata')}}" onsubmit="clearField();">
+                   <form class="form-horizontal" method="POST" role="form" action="{{url('billdata')}}" onsubmit="clearField();">
             {!! csrf_field() !!}
             <fieldset>
 
             <div class="form-group" id="searchfield">
                  <label for="user_id" class="col-sm-2 control-label">ชื่อลูกค้า</label>
               <div class="col-sm-3">
-                 <input type="text" name="name" placeholder="ชื่อลูกค้า"  class="form-control" id="autocomplete" required>
+                 <input type="text" name="name" placeholder="ชื่อลูกค้า"  class="form-control" id="autocomplete" value="{{ old('name')}}" required>
               </div>
             </div>
-
-            <div class="form-group">
+            <div class="form-group" >
                   <label for="products_id" class="col-sm-2 control-label">สินค้า</label>
               <div class="col-sm-3">
-                  <input id="name" type="text" name="names[]" class="form-control" placeholder="ชื่อสินค้า" autofocus required>
+                 <input  list="mylist" class="form-control" name="names[]" placeholder="ชื่อสินค้า" value="{{ old('names[]')}}" required>
+                 <datalist id="mylist">
+                  @foreach($name as $s)
+                  <option>{{$s->name}}</option>
+                  @endforeach
+                 </datalist>
               </div>
+               
                   <label for="amount" class="col-sm-2 control-label">จำนวน</label>
               <div class="col-sm-2">
                   <input type="text" name="amount[]" class="form-control" placeholder="จำนวน" 
@@ -118,12 +76,11 @@
               </div>
 
                     <button type="button" class="btn btn-success btn-add">+</button>
-                </div>
-
+                </div> 
             <div class="form-group">
-                  <label for="time" class="col-sm-2 control-label">วันที่จัดส่ง</label>
+                  <label for="time"  class="col-sm-2 control-label">วันที่จัดส่ง</label>
               <div class="col-sm-3">
-                  <input type="date" class="form-control" id="time" name="time" placeholder="" required>
+                  <input type="date" class="form-control" id="time" name="time" placeholder="" value="{{ old('time')}}" required>
               </div>
             </div>
 
@@ -141,10 +98,42 @@
                     </div>
                 </div>
             </fieldset>
-        </form>
+        </form>         
+ 
+                </div>
+            </div>
+       </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+            </form>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ข้อมูลสินค้า</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <form action="postImport" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <div class="file-loading">
+          <input type="hidden" name="_token" value="{{csrf_token()}}">
+          <input id="input-b9" name="input-b9" multiple type="file"'>
+        </div>
+        <div id="kartik-file-errors"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" title="Your custom upload logic">Save</button>
+      </div>
+  </form>
     </div>
-</body>
-</html>   
+  </div>
+</div>
+</div>
+@endsection   
     
     
 

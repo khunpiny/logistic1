@@ -12,20 +12,19 @@
                     {!! csrf_field() !!}
                     <fieldset>
                         <!-- Form Name -->
-                        <legend>Product</legend>
+                        <legend>แก้ไขสินค้า</legend>
                         <!-- Text input-->
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="textinput">Product id</label>
+                         <div class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">รหัสสินค้า</label>
                             <div class="col-md-6">
                                 <input id="textinput" name="products_id" type="text" class="form-control input-md"
                                        value="{{$data->products_id}}">
                             </div>
-                        </div>
-
+                            </div>
+        
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="color">Product name</label>
+                            <label class="col-md-4 control-label" for="color">ชื่อสินค้า</label>
                             <div class="col-md-6">
                                 <input id="color" name="name" type="text" class="form-control input-md"
                                        value="{{$data->name}}">
@@ -33,7 +32,7 @@
                         </div>
                         <!-- Text inputPrice-->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="color">Price</label>
+                            <label class="col-md-4 control-label" for="color">ราคาขาย</label>
                             <div class="col-md-6">
                                 <input id="color" name="price" type="text" class="form-control input-md"
                                        value="{{$data->price}}">
@@ -42,7 +41,7 @@
 
                         <!-- Text inputcost-->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="color">Cost</label>
+                            <label class="col-md-4 control-label" for="color">ราคาต้นทุน</label>
                             <div class="col-md-6">
                                 <input id="color" name="cost" type="text" class="form-control input-md"
                                        value="{{$data->cost}}">
@@ -50,12 +49,11 @@
                         </div>
                         <!-- Text inputAddcount-->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="account">Amount</label>
+                            <label class="col-md-4 control-label" for="account">จำนวน</label>
                             <div class="col-md-2">
                                 <div class="input-group">
                                     <input id="account" name="amount" class="form-control" placeholder="0" type="text"
                                            value="{{$data->amount}}">
-                                    <span class="input-group-addon">+Add</span>
                                 </div>
                             </div>
                         </div>
@@ -63,11 +61,11 @@
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="comparison">category</label>
+                            <label class="col-md-4 control-label" for="comparison">หมวดหมู่</label>
                             <div class="col-md-4">
                                 <select id="comparison" name="category" class="form-control"
                                         value="{{$data->category}}">
-                                    <?php $types = array('xhaust pipe', 'steel'); ?>
+                                    <?php $types = array('ท่อไอเสีย', 'เหล็ก','อะไหล่รถยนต์'); ?>
                                     @foreach($types as $t)
                                         @if($data->category == $t)
                                             <option value="{{$t}}" selected="">
@@ -85,8 +83,8 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="submitButton"></label>
                             <div class="col-md-8">
-                                <button id="submitButton" name="submitButton" class="btn btn-success">Save</button>
-                                <button id="cancel" name="cancel" class="btn btn-inverse">Cancel</button>
+                                <button id="submitButton" name="submitButton" class="btn btn-success">บักทึก</button>
+                                <button id="cancel" name="cancel" class="btn btn-inverse">ยกเลิก</button>
                             </div>
                         </div>
                     </fieldset>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Customer;
+use App\Product;
 class SearchController extends Controller
 {
     public function index()
@@ -34,16 +35,24 @@ class SearchController extends Controller
     }
     public function search2(Request $request)
    {
-
+   
         //$customers = DB::table('customers')->distinct()->select('name')->get();
         $customers = Customer::all();
+        $products = Product::all();
 
         foreach($customers as $value) {
             $names[] = array('value' => $value->name,'data' => $value->address);
+            
         }
-        // print_r($names);
+        foreach($products as $value)
+        {
+            $product[] = array('value' => $value->name,'data' => $value->products_id);
+        }
+        // print_r($product);
 
         //$customers = json_encode(['a','b','c']);
-        return view('user.buystore')->with(['customers' => json_encode($names)]);
+        return view('user.buystore')->with(['customers' => json_encode($names)])
+                                    ->with(['products' => json_encode($product)])
+                                    ->with('name',$products);
     }
 }
