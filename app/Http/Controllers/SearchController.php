@@ -34,6 +34,7 @@ class SearchController extends Controller
     	}
     }
     public function search2(Request $request)
+
    {
    
         //$customers = DB::table('customers')->distinct()->select('name')->get();

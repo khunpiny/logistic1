@@ -42,9 +42,7 @@
                 <div class="portlet-body">
                   <form class="form-horizotal" method="POST" role="form" action="{{url('savebill')}}">
              {!! csrf_field() !!}
-             <fieldset>
-    
-
+             <fieldset>    
             <div class="invoice-title">
 
 
@@ -92,8 +90,6 @@
                 </div>
             </div>
         </div>
-
-    
               <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>รายการสั่งซื้อ</strong></h3>
@@ -137,8 +133,6 @@
                         @else
                             ไม่มีข้อมูล
                         @endif
-                              
-                                
                                 <tr>
                                     <td class="thick-line"></td>
                                     <td class="thick-line"></td>

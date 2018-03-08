@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use \Input as Input;
 use App\Test;
+use App\Detail;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -85,7 +86,16 @@ class Controller extends BaseController
     public function outofstock(request $request){
        
         $amount = Product::where('amount','<=',10)->paginate(25);
-        return view('user.store')->with('products',$amount);
+        return view('user.outofstock')->with('products',$amount);
+    }
+
+    public function bestproduct(){
+        $amount  = Detail::select('products_id', DB::raw('COUNT(product_out) as cnt'))
+                                               ->groupBy('products_id')
+                                               ->orderBy('cnt','DESC')
+                                               ->paginate(10);
+ 
+        return view('user.bestproduct')->with('products',$amount);
     }
 
     
@@ -114,5 +124,9 @@ class Controller extends BaseController
     }
     public function profile(){
         return view('user.profile');
+    }
+
+    public function testline(){
+        return view('user.testline');
     }
 }

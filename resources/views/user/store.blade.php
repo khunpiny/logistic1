@@ -4,6 +4,31 @@
 <head>
    <link href="{{asset('css/bootstrap-store.css')}}" rel="stylesheet">
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:   #4CAF50;
+    color: white;
+}
+</style>
 </head>
 <body>
  <!-- <div class="container">
@@ -97,7 +122,8 @@
                     <a href="{{url('delete')}}" class="w3-button w3-red pull-right"><i class="fa fa-trash-o"></i>&nbspลบสินค้า</a>
                     <a href="{{url('insertdata')}}" class="w3-button w3-teal pull-right"><i class="fa fa-th-list"></i>&nbsp เพิ่มสินค้า</a>
               @endif
-                    <table id="datatable-buttons" class="table table-striped"> 
+              <br><br>
+                    <table id="customers">
                         <thead>
                             <tr>
               @if(isset($delete) && $delete==1)

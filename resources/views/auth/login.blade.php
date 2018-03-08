@@ -45,7 +45,6 @@
         </div>
 
       </form>
-
       <p class="text--center">ไม่ใช่สมาชิก<a href="{{ url('/register') }}">ลงทะเบียน</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
 
     </div>

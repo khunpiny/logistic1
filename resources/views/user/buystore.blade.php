@@ -1,21 +1,21 @@
 @extends('layouts.app')
 @section('content')
+
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-search.css')}}">
 <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="{{url('js/jquerytext.js')}}"></script> 
 <script type="text/javascript">
-    $(function(){
-  var currencies = {!! $customers !!};
-  $('#autocomplete').autocomplete({
-    lookup: currencies,
-    onSelect: function (suggestion) {
-      var thehtml = suggestion.data;
-      $('#outputcontent').html(thehtml);
-    }
-  });
-
+  $(function(){
+    var currencies = {!! $customers !!};
+    $('#autocomplete').autocomplete({
+      lookup: currencies,
+      onSelect: function (suggestion) {
+        var thehtml = suggestion.data;
+        $('#outputcontent').html(thehtml);
+      }
+    });
   });
 </script>
 <div class="row">
@@ -47,17 +47,20 @@
                 @endforeach
             </ul>
         </div>
-   @endif
-                   <form class="form-horizontal" method="POST" role="form" action="{{url('billdata')}}" onsubmit="clearField();">
+    @endif
+            <form class="form-horizontal" method="POST" role="form" action="{{url('billdata')}}" onsubmit="clearField();">
+
             {!! csrf_field() !!}
             <fieldset>
-
-            <div class="form-group" id="searchfield">
-                 <label for="user_id" class="col-sm-2 control-label">ชื่อลูกค้า</label>
-              <div class="col-sm-3">
-                 <input type="text" name="name" placeholder="ชื่อลูกค้า"  class="form-control" id="autocomplete" value="{{ old('name')}}" required>
-              </div>
-            </div>
+<body ng-controller="searchController">
+     <div class="form-group">
+       <label for="user_id" class="col-sm-2 control-label">ค้นหาลูกค้า</label>
+      <div class="col-sm-3">
+     <!-- Search -->
+      <input type="text" name="name" placeholder="Search" ng-model="query" ng-focus="focus=true"  class="form-control">
+    </div>
+    </div>
+           
             <div class="form-group" >
                   <label for="products_id" class="col-sm-2 control-label">สินค้า</label>
               <div class="col-sm-3">
@@ -74,7 +77,6 @@
                   <input type="text" name="amount[]" class="form-control" placeholder="จำนวน" 
                                autofocus required>
               </div>
-
                     <button type="button" class="btn btn-success btn-add">+</button>
                 </div> 
             <div class="form-group">
@@ -134,10 +136,3 @@
 </div>
 </div>
 @endsection   
-    
-    
-
- 
-
-
-  

@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/registear') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -56,6 +56,30 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                            <label  class="col-md-4 control-label">status</label>
+
+                            <div class="col-md-6">
+                                <input  id="status" type="text" class="form-control" name="status" required>
+                            </div>
+                        </div>
+
+                         <div class="form-group{{ $errors->has('tel') ? ' has-error' : '' }}">
+                            <label  class="col-md-4 control-label">tel</label>
+
+                            <div class="col-md-6">
+                                <input  id="tel" type="text" class="form-control" name="tel" required>
+                            </div>
+                        </div>
+
+                         <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }}">
+                            <label  class="col-md-4 control-label">sex</label>
+
+                            <div class="col-md-6">
+                                <input  id="sex" type="text" class="form-control" name="sex" required>
                             </div>
                         </div>
 

@@ -16,14 +16,22 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/test','Controller@test');
 
 Route::get('/billsuccess', function () {
     return view('user.billsuccess');
 });
+
+Route::get('/a', function () {
+    return view('test');
+
+});
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function () {
+
+
 
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::get('/home', 'HomeController@index');
@@ -56,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/store','Controller@searchdata');
 
 //pdf
+
     Route::get('pdf.{id}','PDFController@pdf');
 //TransportController
     Route::get('/transport','TransportController@transport');
@@ -82,6 +91,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/bestseller','Controller@bestseller');
 //profile
     Route::get('/profile','Controller@profile');
+    Route::post('/postprofile','ProfileController@postprofile');
+
+    Route::get('pdf','PDFController@pdf');
+    // Route::get('/transport','PDFController@transport');
+
+//autocomplete
+    // Route::get('/buystore',array('as' => 'autocomplete','uses' => 'BillController@buystore'));
+    // Route::get('/autocomplete',array('as' => 'autocomplete','uses' => 'BillController@autocomplete'));
+
+ //SearchController
+    Route::get('/index','SearchController@index');
+    Route::get('/search','SearchController@search');
+   
+    Route::get('/search2','SearchController@search2');
+//สินค้าขายดี
+    Route::get('/bestproduct','Controller@bestproduct');
+
 });
 
 // Route::get('navbar','Controller@navbar');
@@ -90,7 +116,7 @@ Route::group(['middleware' => ['auth']], function () {
 // Route::get('login','LoginController@login');
 
 
-
+Route::get('/testline','Controller@testline');
 Route::get('hello','Controller@show');
 
 

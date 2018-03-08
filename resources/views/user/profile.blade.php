@@ -57,7 +57,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">เบอร์โทร</label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" name="name" value="{{Auth::user()->name}}" />
+                       <input type="text" class="form-control" name="name" value="{{Auth::user()->tel}}" />
                     </div>
                 </div>
                </div>
@@ -151,22 +151,28 @@
         </div>
         <div id="portlet1" class="panel-collapse collapse in">
             <div class="portlet-body">
-              <form class="form-sample" action="{{url('/postdata')}}" method="post">
-                    {{ csrf_field() }}
+              <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                {{ csrf_field() }}
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="form-group row">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                           <label class="col-sm-3 col-form-label">ชื่อ</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" />
+                            <input id="name" type="text" type="text" class="form-control" name="name" />
+
+                             @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group row">
+                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                             <label class="col-sm-3 col-form-label">ตำแหน่ง</label>
                           <div class="col-sm-6">
-                            <select class="form-control" name="category">
+                            <select class="form-control" name="status" id="status">
                               <option>เจ้าของร้าน</option>
                               <option>ผู้จัดการร้าน</option>
                               <option>พนักงาน</option>
@@ -177,10 +183,10 @@
                     </div>
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="form-group row">
+                        <div class="form-group{{ $errors->has('tel') ? ' has-error' : '' }}">
                           <label class="col-sm-3 col-form-label">เบอร์โทร</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" />
+                            <input type="text" class="form-control" name="tel" id="tel" />
                           </div>
                         </div>
                       </div>
@@ -189,16 +195,16 @@
                           <label class="col-sm-3 col-form-label">เพศ</label>
                           <div class="col-sm-3">
                             <div class="form-radio">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked>
+                              <label class="form-radio">
+                                <input type="radio" class="form-check-input" name="sex" id="membershipRadios1" value="หญิง" checked>
                                 หญิง
                               </label>
                             </div>
                           </div>
                           <div class="col-sm-3">
                             <div class="form-radio">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2">
+                              <label class="form-radio">
+                                <input type="radio" class="form-check-input" name="sex" id="membershipRadios2" value="ชาย">
                                 ชาย
                               </label>
                             </div>
@@ -209,15 +215,20 @@
                
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="form-group row">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                           <label class="col-sm-3 col-form-label">email</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="" name="amount" />
+                            <input type="email" class="form-control" placeholder="" name="email" id="email" />
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <!-- text -->
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                          <label class="col-sm-3 col-form-label">password</label>
+                          <div class="col-sm-6">
+                            <input type="password" class="form-control" placeholder="" name="password" id="password" />
+                        </div>
+                        </div>
                       </div>
                     </div>
                   
@@ -239,7 +250,7 @@
                     <center>
             <button type="submit" class="w3-button w3-blue"><i class="fa fa-file-text-o"></i>&nbsp บันทึก</button>
                                   
-            <a href="{{url('/insertdata')}}" class="w3-button w3-red"><i class="fa fa-file-text-o"></i>&nbsp ยกเลิก</a>
+            <a href="" class="w3-button w3-red"><i class="fa fa-file-text-o"></i>&nbsp ยกเลิก</a>
         </center>
                   </form>
                                    

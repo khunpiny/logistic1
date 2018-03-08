@@ -3,6 +3,7 @@
 
 
 @section('content')
+
 <div class="page-title"> 
                     <h3 class="title">ยินดีต้อนรับ !</h3> 
                 </div>
@@ -13,7 +14,7 @@
                         <div class="portlet"><!-- /primary heading -->
                             <div class="portlet-heading">
                                 <h3 class="portlet-title text-dark text-uppercase">
-                                    รายงานยอดขายรายสัปดาห์
+                                    หมวดหมู่สินค้าขายดีรายสัปดาห์
                                 </h3>
                             </div>
                             <div id="portlet1" class="panel-collapse collapse in">
@@ -114,6 +115,9 @@
                             <span class="dynamicbar-big"></span> 
                         </div> 
                     </div>
+
+
+                        
 
                     <div class="col-lg-3 col-sm-6">
                         <div class="tile-stats white-bg"> 

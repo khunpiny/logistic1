@@ -139,5 +139,6 @@ class ProductController extends Controller
     public function fileexcel(){
         return view('user.fileexcel');
     }
+   
 
 }

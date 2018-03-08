@@ -34,7 +34,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">ชื่อสินค้า</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" />
+                            <input type="text" class="form-control" name="name" required="" />
                           </div>
                         </div>
                       </div>
@@ -42,7 +42,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">ราคาขาย</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control" placeholder="บาท" name="price" />
+                            <input type="text" class="form-control" placeholder="บาท" name="price" required="" />
                           </div>
                         </div>
                       </div>
@@ -64,7 +64,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">ราขาต้นทุน</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control" placeholder="บาท" name="cost" />
+                            <input type="text" class="form-control" placeholder="บาท" name="cost" required="" />
                           </div>
                         </div>
                       </div>
@@ -74,7 +74,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">จำนวน</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control" placeholder="ชิ้น" name="amount" />
+                            <input type="text" class="form-control" placeholder="ชิ้น" name="amount" required="" />
                           </div>
                         </div>
                       </div>

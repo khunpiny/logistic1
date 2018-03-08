@@ -13,8 +13,7 @@
 
     <!-- Styles -->
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
-    
+    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script> 
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -67,7 +66,6 @@
 </head>
 
 <body>
-
         <!-- Aside Start-->
         <aside class="left-panel">
 
@@ -88,8 +86,8 @@
                         <a href="#"><i class="zmdi zmdi-format-list-bulleted "></i> <span class="nav-label">สินค้า</span><span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{url('store')}}">คลังสินค้า</a></li>
-                            <li><a href="{{url('/outofstock')}}">สินค้าใกล้หมด</a></li>
-                            <li><a href="ui-icons.html">สินค้าขายดี<span class="badge bg-success">7</span></li></a>
+                            <li><a href="{{url('/outofstock')}}">สินค้าใกล้หมด<span class="badge bg-danger"><?php $amount[] = DB::table('products')->where('amount','<=',10)->value('name'); ?> {{count('amount')}} </span></a></li>
+                            <li><a href="{{url('/bestproduct')}}">สินค้าขายดี<span class="badge bg-success">10</span></li></a>
                             <!-- <li><a href="ui-panels.html">Panels</a></li>
                             <li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a></li>
                             <li><a href="ui-modals.html">Modals</a></li>
@@ -99,7 +97,7 @@
                             <li><a href="ui-sweet-alert.html">Sweet-Alert</a></li> -->
                         </ul>
                     </li>
-                    <li class="has-submenu"><a href="{{url('buystore')}}"><i class="zmdi zmdi-shopping-cart-plus"></i> <span class="nav-label">สั่งซื้อสินค้า</span><span class="badge bg-warning">New</span></a>
+                    <li class="has-submenu"><a href="{{url('buystore')}}"><i class="zmdi zmdi-shopping-cart-plus"></i> <span class="nav-label">สั่งซื้อสินค้า</span></a>
                         <!-- <ul class="list-unstyled">
                             <li><a href="components-grid.html">Grid</a></li>
                             <li><a href="components-portlets.html">Portlets</a></li>
@@ -416,14 +414,11 @@
             Morris.Donut({
       element: 'chart',
       data: [
-        {label: "รายรับ", value: 12},
-        {label: "รายจ่าย", value: 30}
-       
+        {label: "ท่อไอเสีย", value: 12},
+        {label: "เหล็ก", value: 30},
+        {label: "อะไหล่รถยนต์", value: 10}
       ]
      });
         </script>
-
-    
-
     </body>
 </html>

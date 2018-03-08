@@ -18,7 +18,6 @@ use App\Customer;
 use App\Detail;
 use App\Order_product;
 
-
 class BillController extends Controller
 {
     /**
@@ -78,8 +77,6 @@ class BillController extends Controller
 
             return view('user.bill')->with('products', $products)->with('amounts',$amounts)->with('time',$time)->with('id',$id)->with('customer',$customer);
           }
-       
-        
     }
      else{
         return back()->withErrors($validator)->withInput();
@@ -108,6 +105,8 @@ class BillController extends Controller
         // 'location.alpha_num' => 'กรุณาป้อนให้อยู่ในรูปแบบของที่อยู่ด้วยค่ะ'
     ];
   }
+
+
 
 
     public function query(Request $request)

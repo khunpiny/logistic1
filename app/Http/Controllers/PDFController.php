@@ -18,4 +18,10 @@ class PDFController extends Controller
       
       return @$pdf->stream();
     }
+
+    public function transport()
+    {
+      $Orders = Order::all();
+      return view('user.transport')->with('Orders',$Orders);
+    }
 }

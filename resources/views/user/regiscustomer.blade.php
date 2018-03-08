@@ -5,7 +5,6 @@
              async defer></script>
 
 
-
 <form class="form-horizontal" action="{{url('customer')}}" method="POST" role="form">
 <fieldset>
 <div class="container-fluid">
@@ -193,7 +192,6 @@
   
   </section>
 </div>
-
 </fieldset>
 {!! csrf_field() !!}
 </form>

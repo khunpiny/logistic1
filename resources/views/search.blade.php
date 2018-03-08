@@ -46,8 +46,8 @@
     		})
     	})
     </script>
-
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css"> 
 </body>
 </html>
-<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css"> 
+
