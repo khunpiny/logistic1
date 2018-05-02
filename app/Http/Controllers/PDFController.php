@@ -24,4 +24,5 @@ class PDFController extends Controller
       $Orders = Order::all();
       return view('user.transport')->with('Orders',$Orders);
     }
+
 }

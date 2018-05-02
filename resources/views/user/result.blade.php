@@ -1,8 +1,31 @@
 @extends('layouts.app')
 @section('content')
-  <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
+<head>
+	<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+<style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       tr td {
@@ -49,8 +72,8 @@
           color: #333;
       }
 
-    </style>
-    <script type="text/javascript">
+</style>
+ <script type="text/javascript">
       /*
 Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !
 */
@@ -97,11 +120,7 @@ $(document).ready(function(){
     });
 });
 </script>
-</head>
-  <body>
-    <div class="col-md-6">
-      <div id="map"></div>
-      <script>
+<script>
 
         var locations = {!! $customers !!};
         var origin    = {!! $origin !!};
@@ -189,18 +208,97 @@ $(document).ready(function(){
           });          
         }
 
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU&callback=initMap" async defer></script>
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU&callback=initMap" async defer></script>
+</head>
+
+<div class="row">
+    <div class="col-lg-12">
+       <div class="portlet"><!-- /primary heading -->
+           <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">
+                รายการสินค้าที่ต้องส่งวันที่ {{$date}}
+                </h3>
+                <div class="portlet-widgets">
+                    <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                    <span class="divider"></span>
+                    <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                    <span class="divider"></span>
+                    <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="portlet2" class="panel-collapse collapse in">
+            <div class="portlet-body">
+            <div class="table-responsive">
+
+            <table id="customers">
+			  <tr>
+			    <th>ลำดับบิล</th>
+			    <th>ชื่อร้าน</th>
+			    <th>เบอร์โทร</th>
+			    <th>ที่อยู่</th>
+			  </tr>
+			  @foreach($orders as $o)
+			  <tr>
+			  	
+			    <td>{{$o->order_id}}</td>
+			    <td><?php echo (DB::table('customers')->where('customers_id',$o->customers_id)->value('name'));
+                 ?> </td>
+			    <td><?php echo (DB::table('customers')->where('customers_id',$o->customers_id)->value('tel'));
+                 ?></td>
+			    <td><?php echo (DB::table('customers')->where('customers_id',$o->customers_id)->value('address'));
+                 ?> </td>
+			
+			  </tr>    
+			 @endforeach
+			</table>
+			<p class="muted pull-right"><strong><a href="{{ url('pdf') }}" class="btn btn-xs btn-primary">Export PDF</a></strong></p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-5 col-md-offset-1">
-      <table id="routes" class="table table-hover">
-        <tbody>
+    </div> <!-- end col -->
+</div>
+
+    <div class="col-lg-12">
+
+        <div class="portlet"><!-- /primary heading -->
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">
+                                    เส้นทางที่ต้องส่งสินค้า
+                </h3>
+                <div class="portlet-widgets">
+                    <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                    <span class="divider"></span>
+                    <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                    <span class="divider"></span>
+                    <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="portlet2" class="panel-collapse collapse in">
+            <div class="portlet-body">
+            <div class="table-responsive">
+            <div id="map"></div>
+             <table id="routes" class="table table-hover">
+             <tbody>
           <tr>
             <th style="text-align: left">Name</th>
             <th>Distance</th>
           </tr>
         </tbody>
       </table>
-    </div>
-  </body>
+
+
+
+   
+ 
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+
+
+
+
+
 @endsection

@@ -86,7 +86,7 @@
                         <a href="#"><i class="zmdi zmdi-format-list-bulleted "></i> <span class="nav-label">สินค้า</span><span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{url('store')}}">คลังสินค้า</a></li>
-                            <li><a href="{{url('/outofstock')}}">สินค้าใกล้หมด<span class="badge bg-danger"><?php $amount[] = DB::table('products')->where('amount','<=',10)->value('name'); ?> {{count('amount')}} </span></a></li>
+                            <li><a href="{{url('/outofstock')}}">สินค้าใกล้หมด<span class="badge bg-danger"><?php $amount = DB::table('products')->where('amount','<=',10)->get(); ?> {{count($amount)}} </span></a></li>
                             <li><a href="{{url('/bestproduct')}}">สินค้าขายดี<span class="badge bg-success">10</span></li></a>
                             <!-- <li><a href="ui-panels.html">Panels</a></li>
                             <li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a></li>
@@ -120,12 +120,12 @@
                             <li><a href="form-xeditable.html">X-Editable</a></li> -->
                         </ul>
                     </li>
-                    <li class="has-submenu"><a href="#"><i class="fa fa-id-card"></i> <span class="nav-label">ข้อมูลลูกค้า</span><span class="menu-arrow"></span></a>
+                    <li class="has-submenu"><a href="#"><i class="fa fa-truck"></i> <span class="nav-label">การขนส่ง</span><span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{url('/regiscustomer')}}">บันทึกข้อมูลลูกค้ารายใหม่</a></li>
-                            <li><a href="{{url('/test')}}">ข้อมูลลูกค้าเก่า</a></li>
-                            <!-- <li><a href="tables-editable.html">Editable Table</a></li>
-                            <li><a href="tables-responsive.html">Responsive Table</a></li> -->
+                            <li><a href="{{url('/test')}}">ระยะทาง(km)</a></li>
+                            <li><a href="tables-editable.html">ค้นหาสถานที่ส่ง</a></li>
+                            <!-- <li><a href="tables-responsive.html">Responsive Table</a></li> -->
                         </ul>
                     </li>
                     <!-- <li class="has-submenu"><a href="#"><i class="zmdi zmdi-chart"></i> <span class="nav-label">Charts</span><span class="menu-arrow"></span></a>
@@ -254,7 +254,8 @@
                         </li> -->
                         <!-- /messages -->
                         <!-- Notification -->
-                        <li class="dropdown">
+                        <!-- แจ้งเตือน -->
+                        <!-- <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="zmdi zmdi-notifications-none"></i>
                                 <span class="badge badge-sm up bg-pink count">3</span>
@@ -286,18 +287,18 @@
                                     <p><a href="#" class="text-right">See all notifications</a></p>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <!-- /Notification -->
 
                         <!-- user login dropdown start-->
                         <li class="dropdown text-center">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <img alt="" src="img/avatar-2.jpg" class="img-circle profile-img thumb-sm">
+                                <img alt="" src="img/pin.jpg" class="img-circle profile-img thumb-sm">
                                 <span class="username">{{ Auth::user()->name }}</span> <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu pro-menu fadeInUp animated" tabindex="5003" style="overflow: hidden; outline: none;">
-                                <li><a href="profile.html"><i class="fa fa-briefcase"></i>โปรไฟล์</a></li>
-                                <li><a href="#"><i class="fa fa-cog"></i> ตั้งค่าบัญชีผู้ใช้</a></li>
+                                <li><a href="profile"><i class="fa fa-briefcase"></i>โปรไฟล์</a></li>
+                                <!-- <li><a href="profile"><i class="fa fa-cog"></i> ตั้งค่าบัญชีผู้ใช้</a></li> -->
                                 <!-- <li><a href="#"><i class="fa fa-bell"></i> Friends <span class="label label-info pull-right mail-info">5</span></a></li> -->
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> ออกจากระบบ</a>
@@ -389,17 +390,18 @@
         </script>
 
         <script type="text/javascript">
+
             new Morris.Line({
         // ID of the element in which to draw the chart.
         element: 'divname',
         // Chart data records -- each entry in this array corresponds to a point on
         // the chart.
               data: [
-        { year: '2008', value: 20 },
-        { year: '2009', value: 10 },
-        { year: '2010', value: 5 },
-        { year: '2011', value: 5 },
-        { year: '2012', value: 20 }
+        { year: '2017', value: 0 },
+        { year: '2018', value:  5 },
+        { year: '2019', value: 0 },
+        { year: '2020', value: 5 },
+        { year: '2021', value: 5 }
       ],
       // The name of the data record attribute that contains x-values.
       xkey: 'year',

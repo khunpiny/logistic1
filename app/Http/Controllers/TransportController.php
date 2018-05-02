@@ -75,4 +75,31 @@ class TransportController extends Controller
         return view('user.transport')->with('orders',$orders);
     }
 
+    public function result(request $request){
+        $datadata = $request->get('search');
+        $orders = Order::where('time',$datadata)->get();
+        if(count($orders)!=0)
+        {
+        $customers = Customer::where('customers_id', '!=' , 11)->get(); 
+         for($i=0;$i<count($orders);$i++){
+            $names[] = array((DB::table('customers')->where('customers_id',$orders[$i]->customers_id)->value('name')),(DB::table('customers')->where('customers_id',$orders[$i]->customers_id)->value('latitude')), (DB::table('customers')->where('customers_id',$orders[$i]->customers_id)->value('longtitude'))  );
+
+        }
+        $origin = Customer::where('customers_id', 12)->first();
+        return view('user.result')->with('date',$datadata)
+                                  ->with('orders',$orders)
+                                  ->with(['customers' => json_encode($names)])
+                                  ->with('cus',$customers)
+                                  ->with('customers_obj',$customers)
+                                  ->with(['origin' => json_encode($origin)]);
+        } 
+        else
+        {
+        $orders = Order::where('status',"เตรียมส่ง")->get();
+        return view('user.transport')->with('orders',$orders);
+        }
+
+                                          
+    }
+
 }

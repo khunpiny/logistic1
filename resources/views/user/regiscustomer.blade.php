@@ -40,7 +40,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-874" />
-        <title>สอนค้นหาแบบ autocomplete ใน google map api v3</title>
+        
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=th"></script> 
         <script>

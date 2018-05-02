@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/livesearch', function () {
+    return view('user.livesearch');
+
+});
 
 
 Route::get('/test','Controller@test');
@@ -27,6 +31,7 @@ Route::get('/a', function () {
     return view('test');
 
 });
+
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function () {
@@ -66,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
 //pdf
 
     Route::get('pdf.{id}','PDFController@pdf');
+    Route::get('billpdf','PDFController@billpdf');
 //TransportController
     Route::get('/transport','TransportController@transport');
     Route::post('/transport','TransportController@status');
@@ -107,6 +113,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/search2','SearchController@search2');
 //สินค้าขายดี
     Route::get('/bestproduct','Controller@bestproduct');
+//result
+    Route::post('/result','TransportController@result');
 
 });
 

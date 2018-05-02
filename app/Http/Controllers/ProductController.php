@@ -119,6 +119,7 @@ class ProductController extends Controller
 
     public function import(Request $request)
     {
+
        Excel::load(Input::file('input-b9'),function($reader){
         $reader->each(function($sheet){
             Product::firstOrCreate($sheet->toArray());
@@ -129,7 +130,7 @@ class ProductController extends Controller
 
     public function export(){
       $items = Product::all();
-      Excel::create('รายการสินค้า', function($excel) use($items) {
+      Excel::create('items', function($excel) use($items) {
           $excel->sheet('ExportFile', function($sheet) use($items) {
               $sheet->fromArray($items);
           });

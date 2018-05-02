@@ -68,9 +68,30 @@
 }
 </style>
 
+<div class="row">
+    <div class="col-lg-12">
+
+                        <div class="portlet"><!-- /primary heading -->
+                            <div class="portlet-heading">
+                                <h3 class="portlet-title text-dark text-uppercase">
+                                    รายการสินค้าทั้งหมด
+                                </h3>
+                                <div class="portlet-widgets">
+                                    <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                    <span class="divider"></span>
+                                    <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                                    <span class="divider"></span>
+                                    <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="portlet2" class="panel-collapse collapse in">
+                                <div class="portlet-body">
+                                    <div class="table-responsive">  
+            
 <div div class="col-md-12  column margintop20">
-	
-	<div class="container-fluid">
+  
+  <div class="container-fluid">
 
     <div class="panel panel-success">
       <div class="panel-footer">
@@ -82,7 +103,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="col-xs-12 col-md-4"> 
 
-          <form action="{{url('transport')}}" method="get">
+          <form action="{{url('/result')}}" method="post">
+            {{ csrf_field() }}
             <label> ค้นหาบิล </label>
               <div class="form-group">
               <div class="input-group">
@@ -172,5 +194,17 @@
 </div>
 
 </div>
+
+                        </div>
+                    </div> <!-- end col -->
+           
+                </div> <!-- end row -->
+            </form>
+
+   
+
+
+    
+
 
 @endsection

@@ -32,7 +32,7 @@
     <div class="col-lg-12">
         <div class="portlet"><!-- /primary heading -->
             <div class="portlet-heading">
-                <h3 class="portlet-title text-dark text-uppercase">สินค้าขายดี</h3>
+                <h3 class="portlet-title text-dark text-uppercase">สินค้าใกล้หมดคลัง</h3>
             <div class="portlet-widgets">
                 <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
                   <span class="divider">
@@ -51,7 +51,7 @@
                 
                   <table id="customers">
                   <tr>  
-                     <th>ลำดับ</th>
+                     <th>รหัสสินค้า</th>
                      <th>ชื่อสินค้า</th>
                      <th>ราคาขาย</th>
                      <th>ต้นทุน</th>

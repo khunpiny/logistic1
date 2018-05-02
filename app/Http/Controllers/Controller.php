@@ -14,6 +14,13 @@ use App\Customer;
 use \Input as Input;
 use App\Test;
 use App\Detail;
+
+use LINE\LINEBot;
+use NE\LINEBot\Event;
+use LINE\LINEBot\Constant\MessageType;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\Tests\LINEBot\Util\DummyHttpClient;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -90,11 +97,12 @@ class Controller extends BaseController
     }
 
     public function bestproduct(){
-        $amount  = Detail::select('products_id', DB::raw('COUNT(product_out) as cnt'))
+        $amount  = Detail::select('products_id', DB::raw('sum(product_out) as cnt'))
                                                ->groupBy('products_id')
                                                ->orderBy('cnt','DESC')
                                                ->paginate(10);
- 
+                                   
+
         return view('user.bestproduct')->with('products',$amount);
     }
 
@@ -127,6 +135,17 @@ class Controller extends BaseController
     }
 
     public function testline(){
-        return view('user.testline');
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('Uh1KxmnzR24dN+7tTyfNwH06QqbA9ucaEM7tSrxES57rETbQZc3bxzHdh8zHk0M8CpLQ7CdWaK8FtUDyPNAsafFKcBZJLpJH1lzlD6k6UhywGViRayUGkX4G+X29yy/y8YCe9uHSV1aRUePOyGVNQgdB04t89/1O/w1cDnyilFU=');
+        $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '9b055b730a56d2e8272a3445aee4cc11']);
+        //$response = $bot->replyText('<reply token>', 'hello!');
+        //$res = $bot->getUserId();
+        $res = $bot->BaseEvent();
+        /*
+        $this->assertEquals(200, $res->getHTTPStatus());
+        $this->assertTrue($res->isSucceeded());
+        $this->assertEquals(200, $res->getJSONDecodedBody()['status']);
+        */
+
+        dd($res);
     }
 }

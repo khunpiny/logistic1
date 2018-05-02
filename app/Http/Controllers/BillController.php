@@ -25,7 +25,49 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $line_api = "https://notify-api.line.me/api/notify";
+    private $access_token = 'PxeEDQ3xFPr6qZ99mVkoii3XD6yKjRP4psVlRzS9GvM';
+    private function checkStock() {
+       $orderid = DB::table('orders')->orderBy('order_id','desc')->value('customers_id');
+       $time = DB::table('orders')->orderBy('order_id','desc')->value('time');
+       $name = DB::table('customers')->where('customers_id',$orderid)->value('name');
+        $str = "\n{$name} สั่งสินค้าเรียบร้อยแล้วส่งวันที่ {$time}";
+       
+        //$str = 'ทดสอบข้อความ';    //ข้อความที่ต้องการส่ง สูงสุด 1000 ตัวอักษร
+        $image_thumbnail_url = '';  // ขนาดสูงสุด 240×240px JPEG
+        $image_fullsize_url = '';  // ขนาดสูงสุด 1024×1024px JPEG
+        $sticker_package_id = 1;  // Package ID ของสติกเกอร์
+        $sticker_id = 410;    // ID ของสติกเกอร์
 
+        $message_data = array(
+         'message' => $str,
+         'imageThumbnail' => $image_thumbnail_url,
+         'imageFullsize' => $image_fullsize_url,
+         //'stickerPackageId' => $sticker_package_id,
+         //'stickerId' => ''
+        );
+        $result = $this->send_notify_message($message_data);
+    }
+    private function send_notify_message($message_data)
+    {
+     $headers = array('Method: POST', 'Content-type: multipart/form-data', 'Authorization: Bearer '.$this->access_token );
+
+     $ch = curl_init();
+     curl_setopt($ch, CURLOPT_URL, $this->line_api);
+     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+     curl_setopt($ch, CURLOPT_POSTFIELDS, $message_data);
+     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+     $result = curl_exec($ch);
+     // Check Error
+     if(curl_error($ch)) {
+      $return_array = array( 'status' => '000: send fail', 'message' => curl_error($ch) ); 
+     } else {
+      $return_array = json_decode($result, true);
+     }
+     curl_close($ch);
+     return $return_array;
+    }
     public function billdata(Request $request)
     {
 
@@ -74,7 +116,7 @@ class BillController extends Controller
        }
        else
        {
-
+            
             return view('user.bill')->with('products', $products)->with('amounts',$amounts)->with('time',$time)->with('id',$id)->with('customer',$customer);
           }
     }
@@ -172,7 +214,7 @@ class BillController extends Controller
           $data->save();
         }
                   
-       
+        $this->checkStock();
         return View('user.billsuccess');
     }
 

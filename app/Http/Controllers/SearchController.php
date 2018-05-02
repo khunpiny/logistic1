@@ -49,7 +49,7 @@ class SearchController extends Controller
         {
             $product[] = array('value' => $value->name,'data' => $value->products_id);
         }
-        // print_r($product);
+        // print_r(json_encode($names));
 
         //$customers = json_encode(['a','b','c']);
         return view('user.buystore')->with(['customers' => json_encode($names)])

@@ -1,56 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
-  <head>
-    <meta charset="utf-8">
+<head>
+  <meta charset="UTF-8">
+  <title>ระบบจัดการอะไหล่รถยนต์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 
-    <title>Login</title>
+      <link rel="stylesheet" href="css/stylet.css">
+      <style type="text/css">
+        .cont {
+          position: relative;
+           height: 100%;
+           background-image: url("img/bg.jpg");
+           background-size: cover;
+           overflow: auto;
+           font-family: "Open Sans", Helvetica, Arial, sans-serif;
+         }
+        </style>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-    <link href="css/bootstrap-sign.css" rel="stylesheet" type="text/css">
-  </head>
+<body>
 
-  <body class="align">
+  <div class="cont">
+  <div class="demo">
+    <div class="login">
+      <div class="login__check">{{ Auth::user() }}</div>
+      <div class="login__form">
+        <div class="login__row">
+         <form class="form login" role="form" method="POST" action="{{ url('/login') }}">
+         {{ csrf_field() }}      
 
-    <div class="grid">
-      <h2 class="login-header">{{ Auth::user() }}</h2>
+          @if ($errors->has('email'))
+              <span class="help-block">
+              <strong>{{ $errors->first('email') }}</strong>
+              </span>
+          @endif
+          <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+          </svg>
+          <input type="text" class="login__input name" placeholder="email" name="email" />
+       </div>  
 
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
-      <form class="form login" role="form" method="POST" action="{{ url('/login') }}">
-         {{ csrf_field() }}
-        <div class="form__field{{ $errors->has('email') ? ' has-error' : '' }}">
-          <label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">Email</span></label>
-         <input id="login__username" type="text" name="email" class="form__input" placeholder="ชื่อผู้ใช้" required  value="{{ old('email') }}">
-         <br>
+          @if ($errors->has('password'))
+              <span class="help-block">
+              <strong>{{ $errors->first('password') }}</strong>
+              </span>
+          @endif
+        <div class="login__row">
+          <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+          </svg>
+          <input type="password" class="login__input pass" placeholder="Password" name="password" />
         </div>
-
-        <div class="form__field{{ $errors->has('password') ? ' has-error' : '' }}">
-          <label for="login__password"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Password</span></label>
-          <input id="login__password" type="password" name="password" class="form__input" placeholder="รหัสผ่าน" required autofocus>
-           @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                </span>
-                @endif
-        </div>
-
-        <div class="form__field">
-          <input type="submit" value="เข้าสู่ระบบ">
-        </div>
-
-      </form>
-      <p class="text--center">ไม่ใช่สมาชิก<a href="{{ url('/register') }}">ลงทะเบียน</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
-
+        <button type="submit" class="login__submit">เข้าสู่ระบบ</button>
+        <p class="login__signup">ยังไม่ได้เป็นสมาชิก &nbsp;<a>ลงทะเบียน</a></p>
+         </form>
+      </div>
     </div>
-    
-    <svg xmlns="http://www.w3.org/2000/svg" class="icons"><symbol id="arrow-right" viewBox="0 0 1792 1792"><path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z"/></symbol><symbol id="lock" viewBox="0 0 1792 1792"><path d="M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z"/></symbol><symbol id="user" viewBox="0 0 1792 1792"><path d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z"/></symbol></svg>
+   
+   
+    </div>
+  </div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-  </body>
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
 
 </html>
